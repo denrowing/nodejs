@@ -1,72 +1,93 @@
+// Створити 2 папки хлопчики та дівчинки
+// В них створити по 3 файли з обектами {name: 'Somebody', gender: 'female/male'}
+// Визначити невідповідності у назві папки та статі особи.
+// Зробити відповідні переміщення у папки в разі потреби.
+
 const fs = require('fs')
 const path = require('path')
 
-const appendFilePath = path.join(__dirname, 'files', 'write.txt')
-const  mkdirPath = path.join(__dirname, 'files', 'user', 'photos')
-const newFilePath = (mkdirPath, 'newFile.txt')
+// const mkdirPathMale1 = (__dirname, 'boys')
+const appendFilePathMale1 = path.join(__dirname, 'boys')
+// const mkdirPathFemale1 = (__dirname, folder2)
+// console.log(appendFilePathMale1);
 
-// const builder = require('./helper/user.builder')
-//
-// let user = builder.createUser('Denys', 33)
-//
-// console.log(user);
+function checkGender(folder1, folder2) {
+    for(let i = 1, j = 4; i <= 3, j <= 6; i++, j++) {
+        const mkdirPathMale = (__dirname, folder1)
+        const mkdirPathFemale = (__dirname, folder2)
 
-// console.log(__dirname);
-//
-// fs.readFile(`${__dirname}/files/test.txt`, ((err, data) => {  // read file
-//     if (err) {
-//         console.log(err)
-//         return;
+        const appendFilePathMale = path.join(mkdirPathMale, `txt${i}.json`)
+        const appendFilePathFemale = path.join(mkdirPathFemale, `txt${j}.json`)
+
+        // fs.readFile(appendFilePathFemale, (err, data) => {
+        //     if(err) {
+        //         console.log(err);
+        //     }
+        //     console.log((JSON.parse(data).gender), folder1)
+        //
+        // })
+        // fs.readFile(appendFilePathMale, (err, data) => {
+        //     if(err) {
+        //         console.log(err);
+        //     }
+        //     console.log((JSON.parse(data).gender), folder2)
+        // })
+
+
+        fs.readFile(appendFilePathMale, (err, data) => {
+            if (err) {
+                console.log(err);
+            } else if ((JSON.parse(data).gender === 'female') && (folder1 === 'boys')) {
+
+                fs.rename(
+                    appendFilePathMale,
+                    path.join(mkdirPathFemale, `Female${j}.json`),
+                    err => {
+                        console.log(err);
+                    }
+                )
+
+            }
+        })
+
+        fs.readFile(appendFilePathMale, (err, data) => {
+            if (err) {
+                console.log(err);
+            } else if ((JSON.parse(data).gender === 'male') && (folder2 === 'girls')) {
+
+                fs.rename(
+                    appendFilePathFemale,
+                    path.join(mkdirPathMale, `Male${i}.json`),
+                    err => {
+                        console.log(err);
+                    }
+                )
+
+            }
+        })
+        }
+}
+checkGender('boys', `girls`)
+
+// function getFile(folder) {
+//     fs.readdir(path.join(folder), (err, data) => {
+//     if(err) {
+//         console.log(err);
 //     }
-//     console.log(data.toString());
-// }))
+//         console.log(data);
+//     })
+// }
+// let arr = getFile(appendFilePathMale1)
+// console.log(arr[0]);
 //
 //
-// fs.writeFile(`${__dirname}/files/write.txt`, 'Hello', (err) => {
-//     console.log(err);
-// })
+// function getGender(folder) {
+//     fs.readFile(folder, (err, data1) => {
+//         if(err) {
+//             console.log(err);
+//         }
+//         console.log(JSON.parse(data).gender);
+//     })
+// }
 //
-// fs.appendFile(appendFilePath, 'Hello World 33\n', (err) => {  // add something to file
-//     console.log(err);
-// })
-//
-// fs.mkdir(mkdirPath, {recursive: true},(e) => {  // add directory/folders
-//     console.log(e);
-// })
-//
-// fs.unlink(appendFilePath, err => { //delete file
-//     console.log(err);
-// })
-
-fs.rename(
-    appendFilePath,
-    newFilePath,  // replace and rename file
-    err => {
-        console.log(err);
-    }
-    )
-
-fs.stat(newFilePath, (err, stats) => {
-    if (err) {
-        return
-    }
-    console.log(stats);
-})
-
-fs.readdir(newFilePath, (err, data) => {
-    if(err) {
-        console.log(err);
-        return
-    }
-    console.log(data);
-})
-
-// fs.rmdir()
-
-// Створити 2 папки хлопчики та дівчинкию
-// В них створити по 3 файли з обектами {name: 'Svs', gender: 'female'}
-// Create readdir
-
-
-
-
+// getGender()
