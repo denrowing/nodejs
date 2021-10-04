@@ -11,6 +11,7 @@ const checkGender = (folder1, folder2) => {
         const appendFilePathMale = path.join(mkdirPathMale, `txt${i}.json`)
         const appendFilePathFemale = path.join(mkdirPathFemale, `txt${j}.json`)
 
+
         // fs.readFile(appendFilePathFemale, (err, data) => {
         //     if(err) {
         //         console.log(err);
