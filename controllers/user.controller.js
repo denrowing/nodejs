@@ -1,4 +1,6 @@
+const rf
 const db = require('../dataBase/user')
+const dbJson = require('../dataBase/users.json')
 
 module.exports = {
     getUsers: (req, res) => {
@@ -21,4 +23,11 @@ module.exports = {
     updateUser: (req, res) => {
         res.json('UPDATE USER')
     }
+
+    deleteUser: (req, res) => {
+        console.log(req.body);
+        db.slice({...req.body, id: db.length + 1})
+        res.json(db)
+    }
+
 }
