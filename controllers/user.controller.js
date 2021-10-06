@@ -5,6 +5,10 @@ module.exports = {
         res.json(db)
     },
 
+    getUsersbyId: (req, res) => {
+        res.json(db)
+    },
+
     createUser: (req, res) => {
         res.json('CREATE USER')
     },
